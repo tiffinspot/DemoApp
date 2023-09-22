@@ -30,4 +30,3 @@ jobs:
       with:
        name: release.apk
        path: app/build/outputs/bundle/release/
-    # The desired behavior if no files are found using the provided path.
