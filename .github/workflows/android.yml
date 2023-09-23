@@ -32,4 +32,13 @@ jobs:
       uses: actions/upload-artifact@v3.1.3
       with:
        name: app-release
-       path: app\build\outputs\apk\release\app-release-unsigned.apk
+       path: ./app/build/outputs/apk/debug/app-debug.apk
+
+   # Upload the artifact to GitHub Releases
+    - name: Upload to GitHub Releases
+      uses: actions/upload-release-asset@v1
+      with:
+          upload_url: ${{ github.event.repository.releases_url }}/assets?name=my-artifact.apk
+          asset_path: ./app/build/outputs/apk/release/app-release-unsigned.apk
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
