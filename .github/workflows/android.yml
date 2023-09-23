@@ -40,5 +40,6 @@ jobs:
       with:
           upload_url: ${{ github.event.repository.releases_url }}/assets?name=my-artifact.apk
           asset_path: ./app/build/outputs/apk/release/app-release-unsigned.apk
+          asset_name: myapp.apk
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
