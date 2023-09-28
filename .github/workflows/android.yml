@@ -25,8 +25,16 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: Fetch Version Name
-      run: grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\'
+      #run: grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\'
+      run: |
+        versionName=$(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d '"'\'')
+        echo "Version Name: $versionName"
+        echo "export VERSION_NAME=$versionName" >> $GITHUB_ENV
 
+    - name: Use Version Name
+      run: |
+        versionNameFromEnv=$VERSION_NAME
+        echo "Using Version Name from environment variable: $versionNameFromEnv"    
     
     - name: Find APK Files
       run: |
@@ -40,7 +48,7 @@ jobs:
     - name: Upload README.md
       uses: Difegue/action-megacmd@master
       with:
-          args: put ./app/build/outputs/apk /exportedstuff/
+          args: put ./app/build/outputs/apk /exportedstuff/$versionNameFromEnv
       env:
         USERNAME: ${{ secrets.MEGA_USERNAME }}
         PASSWORD: ${{ secrets.MEGA_PASSWORD }}
