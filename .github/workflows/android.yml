@@ -34,12 +34,21 @@ jobs:
        name: app-release
        path: ./app/build/outputs/apk/debug/app-debug.apk
 
-   # Upload the artifact to GitHub Releases
-    - name: Upload to GitHub Releases
-      uses: actions/upload-release-asset@v1
+    - name: Upload README.md
+      uses: Siege-Wizard/mega-upload@1.0.1
       with:
-          upload_url: ${{ github.event.repository.releases_url }}/assets?name=my-artifact.apk
-          asset_path: ./app/build/outputs/apk/release/app-release-unsigned.apk
-          asset_name: myapp.apk
+        file: ./app/build/outputs/apk/debug/app-debug.apk
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        USERNAME: ${{ secrets.MEGA_USERNAME }}
+        PASSWORD: ${{ secrets.MEGA_PASSWORD }}
+
+
+   # # Upload the artifact to GitHub Releases
+   #  - name: Upload to GitHub Releases
+   #    uses: actions/upload-release-asset@v1
+   #    with:
+   #        upload_url: ${{ github.event.repository.releases_url }}/assets?name=my-artifact.apk
+   #        asset_path: ./app/build/outputs/apk/release/app-release-unsigned.apk
+   #        asset_name: myapp.apk
+   #    env:
+   #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
