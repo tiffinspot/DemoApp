@@ -27,9 +27,9 @@ jobs:
     - name: Fetch Version Name
       #run: grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\'
       run: |
-        versionName=$(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d '"'\'')
+        versionName=$(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\')
         echo "Version Name: $versionName"
-        echo "export VERSION_NAME=$versionName" >> $GITHUB_ENV"
+        echo "export VERSION_NAME=$versionName" >> $GITHUB_ENV
 
     - name: Use Version Name
       run: |
