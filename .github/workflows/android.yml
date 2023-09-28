@@ -44,13 +44,20 @@ jobs:
       with:
        name: app-release
        path: ./app/build/outputs/apk/debug/app-debug.apk
-
+       
+    - name: Set Environment Variable
+      run: |
+          echo "VERSION_NAME1=$(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\')" >> $GITHUB_ENV
+      
+    - name: Show Environment Variable
+      run: |
+          echo "Version Name: $VERSION_NAME1"
     - name: Upload README.md
       uses: Difegue/action-megacmd@master
       with:
         run: versionName=$(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\')
         echo "Version Name: $versionName"
-        args: put ./app/build/outputs/apk /exportedstuff/$versionName
+        args: put ./app/build/outputs/apk /exportedstuff/$VERSION_NAME1
       env:
         USERNAME: ${{ secrets.MEGA_USERNAME }}
         PASSWORD: ${{ secrets.MEGA_PASSWORD }}
