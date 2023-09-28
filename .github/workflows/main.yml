@@ -1,11 +1,11 @@
 name: Your Workflow Name
 
 on:
-  pull_request:
+  push:
     branches:
       - dev
-    types: 
-      - closed
+    # types: 
+    #   - closed
 
 jobs:
   build:
