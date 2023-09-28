@@ -1,9 +1,11 @@
 name: Your Workflow Name
 
 on:
-  push:
+  pull_request:
     branches:
-      - main
+      - dev
+    types: 
+      - closed
 
 jobs:
   build:
