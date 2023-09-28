@@ -35,9 +35,9 @@ jobs:
        path: ./app/build/outputs/apk/debug/app-debug.apk
 
     - name: Upload README.md
-      uses: Siege-Wizard/mega-upload@1.0.1
+      uses: Difegue/action-megacmd@master
       with:
-        file: ./app/build/outputs/apk/debug/app-debug.apk
+          args: put ./app/build/outputs/apk /exportedstuff/
       env:
         USERNAME: ${{ secrets.MEGA_USERNAME }}
         PASSWORD: ${{ secrets.MEGA_PASSWORD }}
