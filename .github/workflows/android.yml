@@ -24,6 +24,9 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Fetch Version Name
+      run: grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\'
+
     
     - name: Find APK Files
       run: |
