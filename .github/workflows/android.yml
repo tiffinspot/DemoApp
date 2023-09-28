@@ -48,7 +48,9 @@ jobs:
     - name: Upload README.md
       uses: Difegue/action-megacmd@master
       with:
-          args: put ./app/build/outputs/apk /exportedstuff/$versionNameFromEnv
+        run: versionName=$(grep "versionName" app/build.gradle | awk '{print $2}' | tr -d \''"\')
+        echo "Version Name: $versionName"
+        args: put ./app/build/outputs/apk /exportedstuff/$versionName
       env:
         USERNAME: ${{ secrets.MEGA_USERNAME }}
         PASSWORD: ${{ secrets.MEGA_PASSWORD }}
